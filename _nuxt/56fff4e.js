@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{284:function(n,t,e){"use strict";e.r(t);var o=e(25),component=Object(o.a)({},(function(){var n=this,t=n.$createElement;return(n._self._c||t)("h1",[n._v("Post not found")])}),[],!1,null,null,null);t.default=component.exports}}]);
