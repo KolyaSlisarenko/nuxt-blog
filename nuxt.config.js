@@ -29,7 +29,9 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '~/plugins/store.js'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -52,11 +54,30 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    /*
+     ** You can extend webpack config here
+     */
+    extractCSS: {
+      ignoreOrder: true
+    },
+    extend (config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            fix: true,
+          },
+        });
+      }
+    }
+  },
 
   router: {
     base: '/nuxt-blog/'
   },
-
-  lintOnSave: true
 };

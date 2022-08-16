@@ -7,14 +7,12 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@nuxt/content": "1.15.0",
     "@nuxtjs/axios": "^5.13.6",
-    "@vue/cli": "^5.0.8",
-    "@vue/cli-plugin-eslint": "^4.5.15",
-    "@vue/cli-service": "^5.0.8",
     "core-js": "^3.19.3",
     "nuxt": "^2.15.8",
     "vue": "^2.6.14",
@@ -23,6 +21,13 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
-    "push-dir": "^0.4.1"
+    "push-dir": "^0.4.1",
+    "@vue/cli": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vue/cli-service": "^5.0.8",
+    "eslint": "^6.8.0",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-vue": "^8.3.0",
+    "babel-eslint": "^10.1.0"
   }
 }

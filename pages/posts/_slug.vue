@@ -1,26 +1,22 @@
 <template>
   <article>
-    <nuxt-content :document="article"/>
+    <h2>{{ post.title }}</h2>
+    <nuxt-content :document="post" />
   </article>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      article: null
-    };
-  },
-  async asyncData ({ $content, params }) {
-    try {
-      const article = await $content('posts', params.slug).fetch();
+import { mapState } from 'vuex';
 
-      return { article };
-    } catch (exception) {
-      if (exception?.response?.status === 404) {
-        this.$router.push({ name: 'posts-notFound' });
-      }
-    }
-  }
+export default {
+  async asyncData ({ params, store: { dispatch } }) {
+    await dispatch('post/loadPost', params.slug);
+  },
+
+  computed: {
+    ...mapState('post', {
+      post: (state) => state.post
+    })
+  },
 };
 </script>
