@@ -147,8 +147,6 @@ export const actions = {
    * Load search posts
    */
   [types.LOAD_POSTS.name]: store.createAction(types.LOAD_POSTS, async function (params) {
-    console.log(params);
-
     let query = await this.$content('posts')
       .search('title', params.query);
     const tags = params?.filters?.tags?.filter(item => !!item);
