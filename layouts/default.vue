@@ -1,9 +1,7 @@
 <template>
-  <div>
+  <div class="default-layout">
     <default-header />
-    <div class="container">
-      <Nuxt />
-    </div>
+    <Nuxt />
     <default-footer />
   </div>
 </template>
@@ -28,7 +26,18 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.default-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  main {
+    flex: 1;
+  }
+}
+
 body {
   margin: 0;
 }

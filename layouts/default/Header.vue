@@ -1,42 +1,51 @@
 <template>
   <header>
     <div class="header-logo">
-      <p><b>SLI.M</b></p>
+      <nuxt-link
+        :to="{ name: 'index' }"
+      >
+        <p><b>SLI.M</b></p>
+      </nuxt-link>
     </div>
     <div
       class="header-actions"
-      style="width: 60%; justify-content: center;"
+      style="width: 50%; justify-content: center;"
     >
-      <button class="explore-button">
-        <span>Explore</span> <i class="arrow down ml-1em" />
-      </button>
       <input
+        v-model="query"
         type="text"
         class="input input-search"
         list="programmingLanguages"
         placeholder="Search for anything"
         style="width: 100%"
+        @keyup.enter="onSearchEnter"
       >
-      <button>search</button>
-      <datalist id="programmingLanguages">
-        <option value="Objective C">
-          Objective C
-        </option>
-        <option value="C++">
-          C++
-        </option>
-      </datalist>
+      <button @click="onSearchEnter">
+        search
+      </button>
     </div>
   </header>
 </template>
 
 <script>
+import search from '~/components/search/mixin/search';
+
 export default {
-  name: 'Header'
+  /**
+   * Name
+   */
+  name: 'Header',
+
+  /**
+   * Mixins
+   */
+  mixins: [
+    search
+  ]
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 header {
   display: flex;
   align-items: center;
@@ -46,6 +55,11 @@ header {
 
 .header-logo {
   margin: 0 1em 0 1em;
+
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
 }
 
 .header-actions {

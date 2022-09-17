@@ -23,10 +23,10 @@ export default {
    */
   createAction: function (type, callback) {
     return async function (store, payload) {
-      store.state[type.isLoading] = true;
+      this.commit(`${type.namespace}/${type.isLoading}`, true);
       const response = await callback.call(this, payload);
       this.commit(`${type.namespace}/${type.name}`, response, payload);
-      store.state[type.isLoading] = false;
+      this.commit(`${type.namespace}/${type.isLoading}`, false);
 
       return response;
     };
@@ -35,13 +35,23 @@ export default {
   /**
    * Create mutation
    * @param type
-   * @param callback
-   * @returns {function(*, *): Promise<*>}
+   * @param callbacks
+   * @returns {{}}
    */
-  createMutation: function (type, callback) {
-    return async function (store, payload) {
-      //TODO::Add success, fail, pending, error handling
-      return await callback.call(this, store, payload);
+  createMutation: function (type, callbacks) {
+    const mutations = {
+      [type.name]: async function (store, payload) {
+        //TODO::Add success, fail, pending, error handling
+        return await callbacks.success.call(this, store, payload);
+      },
     };
-  }
+
+    if (type.isLoading) {
+      mutations[type.isLoading] = async function (store, isLoading) {
+        store[type.isLoading] = isLoading;
+      };
+    }
+
+    return mutations;
+  },
 };

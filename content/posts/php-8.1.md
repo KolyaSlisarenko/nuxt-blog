@@ -1,7 +1,7 @@
 ---
 title: 'PHP 8.1 released' 
 description: 'meta description of the page' 
-tags: [php, 2, 3]
+tags: [php, php release, php 8.1, php major change]
 ---
 
 <center>

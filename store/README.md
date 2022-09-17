@@ -1,10 +1,75 @@
-# STORE
+Module store example:
 
-**This directory is not required, you can delete it if you don't want to use it.**
+```js
+/**
+ * It's requred to use store plugin
+ */
+import store from '~/plugins/store';
 
-This directory contains your Vuex Store files.
-Vuex Store option is implemented in the Nuxt.js framework.
+/**
+ * It's required to use vuex default getters and mutations
+ */
+import { getField, updateField } from 'vuex-map-fields';
 
-Creating a file in this directory automatically activates the option in the framework.
+/**
+ * Modules namespace. It's required to create namespace constant
+ * for indentifying methods with the same name in different modules
+ * @type {string}
+ */
+const NAMESPACE = 'namespace';
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/guide/vuex-store).
+/**
+ * Module action type
+ * @type  ACTION: {
+ * SUCCESS: actionSuccess,
+ * FAILURE: actionFailure,
+ * PENDING: actionPending,
+ * isLoading: actionLoading,
+ * ERROR: actionError,
+ * name: action,
+ * namespace: search
+ * }
+ */
+const types = {
+  ACTION: store.createType(NAMESPACE, 'action')
+}
+
+/**
+ * Module state
+ * @returns {{}}
+ */
+export const state = () => ({});
+
+/**
+ * Module getters
+ * @type {{}}
+ */
+export const getters = {
+  getField
+};
+
+/**
+ * Module mutations
+ * @type {*&{updateField: updateField}}
+ */
+export const mutations = {
+  updateField,
+
+  ...store.createMutation(types.ACTION, {
+    success (state, data) {
+
+    }
+  }),
+};
+
+/**
+ * Module actions
+ * @type {{}}
+ */
+export const actions = {
+  /**
+   * Action
+   */
+  [types.ACTION.name]: store.createAction(types.ACTION, query => query),
+};
+```
