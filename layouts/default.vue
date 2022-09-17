@@ -1,27 +1,53 @@
 <template>
-  <div class="container">
-    <TheHeader/>
-    <Nuxt/>
-    <TheFooter/>
+  <div class="default-layout">
+    <default-header />
+    <Nuxt />
+    <default-footer />
   </div>
 </template>
 
 <script>
-import TheHeader from '../components/layouts/default/TheHeader.vue';
-import TheFooter from '../components/layouts/default/TheFooter.vue';
+import Header from '@/layouts/default/Header';
+import Footer from '@/layouts/default/Footer';
 
 export default {
-  name: 'DefeaultLayout',
+  /**
+   * Name
+   */
+  name: 'DefaultLayout',
+
+  /**
+   * Components
+   */
   components: {
-    TheHeader,
-    TheFooter,
-  },
+    DefaultHeader: Header,
+    DefaultFooter: Footer
+  }
 };
 </script>
 
-<style scoped="scss">
+<style lang="scss">
+.default-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  main {
+    flex: 1;
+  }
+}
+
+body {
+  margin: 0;
+}
+
 .container {
   max-width: 1200px;
   margin: auto;
+}
+
+* {
+  font-family: Georgia;
 }
 </style>
